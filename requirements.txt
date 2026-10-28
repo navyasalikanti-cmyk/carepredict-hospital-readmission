@@ -1,0 +1,8 @@
+
+Django>=5.2,<6.0
+gunicorn
+whitenoise
+pandas
+scikit-learn
+joblib
+xgboost
