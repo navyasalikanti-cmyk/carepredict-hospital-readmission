@@ -1,0 +1,9 @@
+
+venv/
+__pycache__/
+*.py[cod]
+.env
+db.sqlite3
+staticfiles/
+diabetic_data.csv
+ml_models/random_forest.joblib

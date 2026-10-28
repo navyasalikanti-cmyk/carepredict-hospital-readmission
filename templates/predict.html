@@ -1,0 +1,89 @@
+
+{% extends "base.html" %}
+
+{% block title %}New Prediction | CarePredict{% endblock %}
+{% block heading %}New Prediction{% endblock %}
+
+{% block content %}
+
+<div class="section-heading">
+    <div>
+        <h2>Patient Encounter Details</h2>
+        <p>Complete the form to generate a model estimate.</p>
+    </div>
+    <span class="status-badge">30-Day Target</span>
+</div>
+
+<div class="form-layout">
+
+    <section class="panel">
+        <div class="form-title">
+            <span>01</span>
+            <div>
+                <h3>Patient Information</h3>
+                <p class="muted">Enter the encounter details below.</p>
+            </div>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="error-message">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-grid">
+                {% for field in form %}
+                    <div class="form-field">
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% for error in field.errors %}
+                            <small class="error-message">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-footer">
+                <p>Use fictional information for software testing.</p>
+
+                <button class="button primary" type="submit">
+                    Run Prediction →
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <aside class="panel info-panel">
+        <div class="info-icon">ⓘ</div>
+        <h3>Before You Submit</h3>
+
+        <p>
+            The model uses selected demographic and hospital encounter
+            features from the training dataset.
+        </p>
+
+        <ul>
+            <li>Complete all required fields.</li>
+            <li>Use the available dropdown options.</li>
+            <li>Review the report after submission.</li>
+            <li>Do not enter identifiable real patient information.</li>
+        </ul>
+
+        <div class="notice">
+            <strong>Prediction Target</strong>
+            <p>Readmission within 30 days, as defined by this project.</p>
+        </div>
+    </aside>
+
+</div>
+
+{% endblock %}

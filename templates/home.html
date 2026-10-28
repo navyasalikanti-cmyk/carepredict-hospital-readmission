@@ -1,0 +1,131 @@
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard | CarePredict{% endblock %}
+{% block heading %}Overview{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+    <span class="welcome-label">PATIENT RISK MONITORING</span>
+
+    <h2>Welcome to CarePredict</h2>
+
+    <p>
+        Manage patient records, explore readmission risk estimates,
+        and review prediction reports in one place.
+    </p>
+
+    <a class="button white-button" href="{% url 'predict' %}">
+        Start a Prediction →
+    </a>
+</section>
+
+<div class="section-heading">
+    <div>
+        <h2>Dashboard Summary</h2>
+        <p>Overview of saved patient records</p>
+    </div>
+    <span class="status-badge">● Local Data</span>
+</div>
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <div class="stat-icon blue-icon">♙</div>
+        <p>Total Patient Records</p>
+        <h2>{{ total_patients }}</h2>
+        <small>Records saved in the database</small>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon orange-icon">↗</div>
+        <p>High-Risk Category</p>
+        <h2>{{ high_risk }}</h2>
+        <small>Predictions above the demo threshold</small>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon green-icon">✓</div>
+        <p>ML Model Status</p>
+        <h2 class="ready-text">Ready</h2>
+        <small>Saved model connected to Django</small>
+    </div>
+
+</div>
+
+<div class="content-grid">
+
+    <section class="panel">
+        <h3>Quick Actions</h3>
+        <p class="muted">Choose what you want to do.</p>
+
+        <a class="action-row" href="{% url 'predict' %}">
+            <span class="action-icon">＋</span>
+            <span>
+                <strong>Create a Prediction</strong>
+                <small>Enter patient encounter details</small>
+            </span>
+            <b>→</b>
+        </a>
+
+        <a class="action-row" href="{% url 'patients' %}">
+            <span class="action-icon purple-icon">▤</span>
+            <span>
+                <strong>Patient Records</strong>
+                <small>Review saved records and reports</small>
+            </span>
+            <b>→</b>
+        </a>
+
+        <a class="action-row" href="/admin/">
+            <span class="action-icon green-icon">⚙</span>
+            <span>
+                <strong>Administration</strong>
+                <small>Manage records in Django admin</small>
+            </span>
+            <b>→</b>
+        </a>
+    </section>
+
+    <section class="panel">
+        <h3>Prediction Workflow</h3>
+        <p class="muted">How the system works</p>
+
+        <div class="workflow-step">
+            <span>01</span>
+            <div>
+                <strong>Patient Information</strong>
+                <small>Demographics and encounter details</small>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <span>02</span>
+            <div>
+                <strong>Machine Learning</strong>
+                <small>Saved preprocessing and classifier</small>
+            </div>
+        </div>
+
+        <div class="workflow-step">
+            <span>03</span>
+            <div>
+                <strong>Prediction Report</strong>
+                <small>Result saved in the database</small>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="notice">
+    <strong>Responsible Use</strong>
+    <p>
+        This student project uses historical diabetes encounter data.
+        Its predictions are not clinically validated and must not be
+        used to make real medical decisions.
+    </p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CarePredict | Hospital Intelligence{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <a class="brand" href="{% url 'home' %}">
+                <span class="brand-mark">C</span>
+                <span>
+                    <strong>CarePredict</strong>
+                    <small>Hospital Intelligence</small>
+                </span>
+            </a>
+
+            <p class="nav-label">WORKSPACE</p>
+
+            <nav class="nav-links">
+                <a href="{% url 'home' %}"><span>▦</span> Dashboard</a>
+                <a href="{% url 'predict' %}"><span>＋</span> New Prediction</a>
+                <a href="{% url 'patients' %}"><span>♙</span> Patient Records</a>
+                <a href="/admin/"><span>⚙</span> Administration</a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="status-dot"></div>
+                <div>
+                    <strong>Demo Environment</strong>
+                    <small>Local development</small>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-area">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">HOSPITAL READMISSION SYSTEM</p>
+                    <h1>{% block heading %}Dashboard{% endblock %}</h1>
+                </div>
+                <a class="button primary" href="{% url 'predict' %}">
+                    + New Prediction
+                </a>
+            </header>
+
+            <section class="page-content">
+                {% block content %}{% endblock %}
+            </section>
+
+            <footer class="footer">
+                CarePredict · Educational ML Demonstration
+                <span>Not for clinical decision-making</span>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

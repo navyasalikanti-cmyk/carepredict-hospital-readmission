@@ -1,0 +1,87 @@
+
+{% extends "base.html" %}
+
+{% block title %}Patient Records | CarePredict{% endblock %}
+{% block heading %}Patient Records{% endblock %}
+
+{% block content %}
+
+<div class="section-heading">
+    <div>
+        <h2>Saved Predictions</h2>
+        <p>View patient details and prediction reports.</p>
+    </div>
+
+    <a class="button primary" href="{% url 'predict' %}">
+        + Add Patient
+    </a>
+</div>
+
+<section class="panel table-panel">
+
+    <h3>All Patient Records</h3>
+    <p class="muted">Sorted by most recent submission</p>
+
+    <div class="table-scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient Name</th>
+                    <th>Age Group</th>
+                    <th>Gender</th>
+                    <th>Probability</th>
+                    <th>Category</th>
+                    <th>Report</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for p in patients %}
+                <tr>
+                    <td>#{{ p.id }}</td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.age }}</td>
+                    <td>{{ p.gender }}</td>
+                    <td>{{ p.risk_probability }}%</td>
+                    <td>
+                        <span class="risk-badge
+                        {% if p.risk_level == 'High' %}
+                            risk-high
+                        {% else %}
+                            risk-low
+                        {% endif %}">
+                            {{ p.risk_level }}
+                        </span>
+                    </td>
+                    <td>
+                        <a class="table-link"
+                           href="{% url 'report' p.id %}">
+                            View Report →
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="empty-state">
+                        <h3>No records yet</h3>
+                        <p>Submit a prediction to add your first record.</p>
+                        <a class="button primary"
+                           href="{% url 'predict' %}">
+                            Create Prediction
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+<div class="notice">
+    <strong>Privacy Reminder</strong>
+    <p>Use fictional records in this student demonstration.</p>
+</div>
+
+{% endblock %}
